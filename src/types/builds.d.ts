@@ -4,3 +4,12 @@ declare type Build = {
     armor: string;
     upgradedArmor: string;
 }
+
+declare interface CharacterStore {
+    name: string;
+    level: number;
+    build: string | null;
+    setName: (name: string) => void;
+    setLevel: (level: number) => void;
+    setBuild: (build: string) => void;
+}
