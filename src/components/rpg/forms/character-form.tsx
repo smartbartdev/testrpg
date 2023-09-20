@@ -35,7 +35,6 @@ export function CharacterForm(props: FormProps) {
     const setName = useStore(state => state.setName);
     const setBuild = useStore(state => state.setBuild);
     const setStats = useStore(state => state.setStats);
-    const strengthx = useStore(state => state.strength)
 
     const form = useForm<z.infer<typeof formSchema>>({
         // @ts-ignore
@@ -84,7 +83,6 @@ export function CharacterForm(props: FormProps) {
                                 field.onChange(value);
                                 setBuild(value);
                                 const {strength, agility, wisdom, magic} = props.builds[value];
-                                console.log(strength, agility, wisdom, magic, strengthx)
                                 setStats(strength, agility, wisdom, magic);
                             }} defaultValue={"thief"}>
                                 <FormControl>
