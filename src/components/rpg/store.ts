@@ -7,4 +7,5 @@ export const useStore = create<CharacterStore>((set) => ({
     setName: (name: string) => set((state) => ({name: name, level: state.level, build: state.build})),
     setLevel: (level: number) => set((state) => ({name: state.name, level: level, build: state.build})),
     setBuild: (build: string) => set((state) => ({name: state.name, level: state.level, build: build})),
+    increaseLevel: () => set((state) => ({name: state.name, level: Math.min(5, state.level + 1), build: state.build})),
 }))
