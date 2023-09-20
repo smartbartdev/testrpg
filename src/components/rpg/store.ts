@@ -14,14 +14,14 @@ export const useStore = create<CharacterStore>((set) => ({
     setStats: (strength: number, agility: number, wisdom: number, magic: number) => set((state) => {
         return {...state, strength, agility, wisdom, magic}
     }),
-    increaseLevel: () => set((state) => ({...state, level: Math.min(5, state.level + 1)})),
-    increaseStats: () => set((state) => {
+    increaseLevel: () => set((state) => {
             return {
                 ...state,
+                level: Math.min(5, state.level + 1),
                 strength: Math.min(10, state.strength + 1),
-                agility: Math.min(10, state.strength + 1),
-                wisdom: Math.min(10, state.strength + 1),
-                magic: Math.min(10, state.strength + 1)
+                agility: Math.min(10, state.agility + 1),
+                wisdom: Math.min(10, state.wisdom + 1),
+                magic: Math.min(10, state.magic + 1)
             }
         }
     ),
