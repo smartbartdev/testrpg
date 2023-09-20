@@ -9,7 +9,7 @@ export interface CharacterProps {
     build: Build;
 }
 
-interface CharacterStatsProps {
+interface CharacterImageContainerProps {
     level: number;
     build: Build;
 }
@@ -20,7 +20,7 @@ function CharacterImage({src, alt}: {src: string, alt: string}) {
     )
 }
 
-function CharacterImageContainer({level, build}: CharacterStatsProps) {
+function CharacterImageContainer({level, build}: CharacterImageContainerProps) {
     return (
         <div className={"relative h-[180px] w-[240px]"}>
             <CharacterImage src={"/sprites/base_scaled_2x.png"} alt={"The base character image"} />
@@ -32,24 +32,37 @@ function CharacterImageContainer({level, build}: CharacterStatsProps) {
     )
 }
 
-function CharacterStats({level, build}: CharacterStatsProps) {
+function CharacterStats() {
+    const strength = useStore(state => state.strength);
+    const agility = useStore(state => state.agility);
+    const wisdom = useStore(state => state.wisdom);
+    const magic = useStore(state => state.magic);
+
     return (
         <section className={"space-y-2 w-1/2"}>
             <h3 className={"font-semibold"}>Stats</h3>
             <ProgressBar
+                data-strength
                 label={"Strength"}
-                value={level}
-                total={5}
+                value={strength}
+                total={10}
             />
             <ProgressBar
+                data-agility
                 label={"Agility"}
-                value={level}
-                total={5}
+                value={agility}
+                total={10}
             />
             <ProgressBar
+                data-wisdom
                 label={"Wisdom"}
-                value={level}
-                total={5}
+                value={wisdom}
+                total={10}
+            />
+            <ProgressBar
+                label={"Magic"}
+                value={magic}
+                total={10}
             />
         </section>
     )
@@ -70,7 +83,7 @@ export function CharacterCard(props: CharacterProps) {
             </CardHeader>
             <CardContent className={"flex"}>
                 <CharacterImageContainer {...props} />
-                <CharacterStats {...props} />
+                <CharacterStats />
             </CardContent>
             <CardFooter className={"flex items-center justify-between"}>
                 <ProgressBar

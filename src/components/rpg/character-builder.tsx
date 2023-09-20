@@ -1,6 +1,6 @@
 "use client"
 import useSWR from "swr";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {BuildMapping} from "@/app/api/builds/route";
 import {CharacterCard} from "@/components/rpg/character";
 
@@ -16,12 +16,18 @@ function Container({builds}: { builds: BuildMapping }) {
     const name = useStore(state => state.name);
     const level = useStore(state => state.level);
     const build = useStore(state => state.build);
+    const setStats = useStore(state => state.setStats);
+
+    useEffect(() => {
+        const {strength, agility, wisdom, magic } = builds["thief"];
+        setStats(strength, agility, wisdom, magic);
+    }, []);
 
     return (
         <div className={"flex flex-col space-y-2"}>
             <div className={"flex flex-col lg:flex-row gap-2"}>
                 <CharacterCard name={name} level={level} build={!!build ? builds[build] : builds["thief"]}/>
-                {!show && <CharacterForm onSubmit={() => setShow(prevState => !prevState)}/>}
+                {!show && <CharacterForm builds={builds} onSubmit={() => setShow(prevState => !prevState)}/>}
             </div>
             {show && <AdventureFormContainer/>}
         </div>

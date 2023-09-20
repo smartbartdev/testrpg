@@ -9,8 +9,10 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {useStore} from "@/components/rpg/store";
 import {Button} from "@/components/ui/button";
 import {useState} from "react";
+import {BuildMapping} from "@/app/api/builds/route";
 
 export interface FormProps {
+    builds: BuildMapping;
     onSubmit: () => void;
 }
 
@@ -30,8 +32,11 @@ const formSchema = z.object({
 
 export function CharacterForm(props: FormProps) {
     const [disabled, setDisabled] = useState<boolean>(false);
-    const setName = useStore(state => state.setName)
-    const setBuild = useStore(state => state.setBuild)
+    const setName = useStore(state => state.setName);
+    const setBuild = useStore(state => state.setBuild);
+    const setStats = useStore(state => state.setStats);
+    const strengthx = useStore(state => state.strength)
+
     const form = useForm<z.infer<typeof formSchema>>({
         // @ts-ignore
         resolver: zodResolver(formSchema),
@@ -58,8 +63,8 @@ export function CharacterForm(props: FormProps) {
                             <FormLabel>Character name</FormLabel>
                             <FormControl>
                                 <Input placeholder={"Galactic space lord"} {...field} onChange={(event) => {
-                                    field.onChange(event)
-                                    setName(event.target.value)
+                                    field.onChange(event);
+                                    setName(event.target.value);
                                 }}/>
                             </FormControl>
                             <FormDescription>
@@ -77,7 +82,10 @@ export function CharacterForm(props: FormProps) {
                             <FormLabel>Build</FormLabel>
                             <Select disabled={disabled} onValueChange={value => {
                                 field.onChange(value);
-                                setBuild(value)
+                                setBuild(value);
+                                const {strength, agility, wisdom, magic} = props.builds[value];
+                                console.log(strength, agility, wisdom, magic, strengthx)
+                                setStats(strength, agility, wisdom, magic);
                             }} defaultValue={"thief"}>
                                 <FormControl>
                                     <SelectTrigger>
