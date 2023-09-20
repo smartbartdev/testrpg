@@ -7,7 +7,7 @@ declare type Build = {
     agility: number;
     wisdom: number;
     magic: number;
-    berserk: boolean;
+    berserk?: boolean;
 }
 
 declare interface CharacterStore {
