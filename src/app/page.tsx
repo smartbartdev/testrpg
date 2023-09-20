@@ -5,12 +5,11 @@ import {cn} from "@/lib/utils";
 
 export default function Home() {
     return (
-        <div className={"text-center space-y-4"}>
-            <section data-testid={"hero"} >
+        <div className={"space-y-4"}>
+            <section data-testid={"hero"} className={"text-center"}>
                 <h1 className={"text-3xl md:text-5xl lg:text-6xl tracking-tight font-extrabold bg-gradient-to-tr from-blue-400 to-blue-800 bg-clip-text text-transparent"}>TestRPG</h1>
-                <h2 className={"text-xl text-muted-foreground max-w-lg"}>
-                    TestRPG is a simple &apos;game&apos; meant to be automated
-                    through a Test Automation Framework.
+                <h2 className={"text-xl text-muted-foreground max-w-xl"}>
+                    TestRPG is a simple &apos;game&apos; meant to be automated through a Test Automation Framework.
                 </h2>
             </section>
             <section data-testid={"links"} className={"flex items-center justify-center space-x-2"}>
