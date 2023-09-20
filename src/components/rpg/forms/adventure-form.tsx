@@ -6,8 +6,6 @@ import {Button} from "@/components/ui/button";
 import {ChangeEvent, ReactNode, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {Slider} from "@/components/ui/slider";
-import {useTheme} from "next-themes";
-
 
 function Task({title, description, children, ...props}: { title: string, description: string, children: ReactNode }) {
     return (
@@ -67,7 +65,6 @@ function Uploader() {
 }
 
 function Typer() {
-    const {setTheme} = useTheme();
     const [value, setValue] = useState<string>("");
     const increaseLevel = useStore(state => state.increaseLevel);
     const activateBerserk = useStore(state => state.activateBerserk);
@@ -80,7 +77,6 @@ function Typer() {
         }
 
         if (event.target.value.toLowerCase() === "all your base are belong to us") {
-            setTheme("berserk");
             activateBerserk();
         }
     }
