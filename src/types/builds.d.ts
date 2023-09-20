@@ -12,7 +12,7 @@ declare type Build = {
 declare interface CharacterStore {
     name: string;
     level: number;
-    build: string | null;
+    build: string;
     strength: number;
     agility: number;
     wisdom: number;

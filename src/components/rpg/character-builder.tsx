@@ -19,9 +19,9 @@ function Container({builds}: { builds: BuildMapping }) {
     const setStats = useStore(state => state.setStats);
 
     useEffect(() => {
-        const {strength, agility, wisdom, magic } = builds["thief"];
+        const {strength, agility, wisdom, magic } = builds[build];
         setStats(strength, agility, wisdom, magic);
-    }, []);
+    }, [build, builds, setStats]);
 
     return (
         <div className={"flex flex-col space-y-2"}>
