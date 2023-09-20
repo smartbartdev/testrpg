@@ -19,10 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("bg-background antialiased", font.className)}>
-        <div className={"relative flex flex-col"}>
+      <body className={cn("w-full bg-background antialiased", font.className)}>
+        <div className={"w-full relative flex flex-col"}>
           <Header />
-          <main>
+          <main className="flex flex-col items-center justify-between py-4 px-2 md:px-12 lg:px-24">
             {children}
           </main>
         </div>

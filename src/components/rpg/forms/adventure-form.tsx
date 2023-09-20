@@ -1,9 +1,9 @@
 "use client"
 
 import {useStore} from "@/components/rpg/store";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
-import {ChangeEvent, FormEventHandler, ReactNode, useState} from "react";
+import {ChangeEvent, ReactNode, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {Slider} from "@/components/ui/slider";
 
@@ -40,7 +40,7 @@ function Clicker() {
             >
                 Click me {maxClicks - clicks} times
             </Button>
-            {clicks === 5 && <span className={"text-lg font-bold text-blue-500"}>Great job! You levelled up</span>}
+            {clicks === 5 && <span className={"text-sm md:text-md lg:text-lg font-bold text-blue-500"}>Great job! You levelled up</span>}
         </Task>
     )
 }
@@ -56,7 +56,7 @@ function Uploader() {
     return (
         <Task title={"Upload it!"} description={"Upload any file to level up"}>
             <Input disabled={!!value} type={"file"} className={"w-1/2"} value={value} onChange={uploadHandler}/>
-            {!!value && <span className={"text-lg font-bold text-blue-500"}>File selected, level up!</span>}
+            {!!value && <span className={"text-sm md:text-md lg:text-lg font-bold text-blue-500"}>File selected, level up!</span>}
         </Task>
     )
 }
@@ -75,7 +75,7 @@ function Typer() {
     return (
         <Task title={"Type it!"} description={"Type Lorem Ipsum to level up"}>
             <Input disabled={value === "Lorem Ipsum"} className={"w-1/2"} value={value} onChange={changeHandler}/>
-            {value === "Lorem Ipsum" && <span className={"text-lg font-bold text-blue-500"}>Dolar sit amet!</span>}
+            {value === "Lorem Ipsum" && <span className={"text-sm md:text-md lg:text-lg font-bold text-blue-500"}>Dolar sit amet!</span>}
         </Task>
     )
 }
@@ -96,7 +96,7 @@ function SliderTask() {
     return (
         <Task title={"Slide it!"} description={"Slide the slider all the way to the right"}>
             <Slider className={"w-1/2"} disabled={disabled} onValueChange={onValueChange} defaultValue={[0]} max={100} step={1} />
-            {value[0] === 100 && <span className={"text-lg font-bold text-blue-500"}>Slid to the next level!</span>}
+            {value[0] === 100 && <span className={"text-sm md:text-md lg:text-lg font-bold text-blue-500"}>Slid to the next level!</span>}
         </Task>
     )
 }
