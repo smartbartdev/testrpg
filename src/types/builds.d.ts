@@ -22,4 +22,5 @@ declare interface CharacterStore {
     setBuild: (build: string) => void;
     setStats: (strength: number, agility: number, wisdom: number, magic: number) => void;
     increaseLevel: () => void;
+    reset: () => void;
 }

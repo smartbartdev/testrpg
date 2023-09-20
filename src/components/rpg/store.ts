@@ -1,6 +1,6 @@
 import {create} from "zustand";
 
-export const useStore = create<CharacterStore>((set) => ({
+const initial = {
     name: "",
     level: 1,
     build: "thief",
@@ -8,6 +8,10 @@ export const useStore = create<CharacterStore>((set) => ({
     agility: 1,
     wisdom: 1,
     magic: 1,
+}
+
+export const useStore = create<CharacterStore>((set) => ({
+    ...initial,
     setName: (name: string) => set((state) => ({...state, name})),
     setLevel: (level: number) => set((state) => ({...state, level})),
     setBuild: (build: string) => set((state) => ({...state, build})),
@@ -25,4 +29,5 @@ export const useStore = create<CharacterStore>((set) => ({
             }
         }
     ),
+    reset: () => set(() => ({...initial})),
 }))

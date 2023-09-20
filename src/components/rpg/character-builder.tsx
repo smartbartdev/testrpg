@@ -37,8 +37,14 @@ function Container({builds}: { builds: BuildMapping }) {
 
 export function CharacterBuilder() {
     const {data, isLoading, error} = useSWR("/api/builds", fetcher);
+    const reset = useStore(state => state.reset);
+
+    useEffect(() => {
+        return () => reset();
+    }, [reset]);
 
     if (isLoading) return null;
+
 
     return (
         <div className={"w-full max-w-5xl space-y-2"}>
