@@ -1,11 +1,17 @@
 "use client"
 
 import Link from "next/link";
+import {useEffect, useState} from "react";
 
 export function ApiExplainer() {
-    const protocol = window.location.protocol
-    const host = window.location.host
-    const apiPath = `${protocol}//${host}/api/builds`
+    const [apiPath, setApiPath] = useState<string>("");
+
+    useEffect(() => {
+        const protocol = window.location.protocol
+        const host = window.location.host
+        setApiPath(`${protocol}//${host}/api/builds`);
+    }, []);
+
 
     return (
         <p className={"text-muted-foreground text-lg"}>
