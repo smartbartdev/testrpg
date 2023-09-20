@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/button";
 import {ChangeEvent, ReactNode, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {Slider} from "@/components/ui/slider";
+import {useTheme} from "next-themes";
 
 
 function Task({title, description, children, ...props}: { title: string, description: string, children: ReactNode }) {
@@ -22,7 +23,7 @@ function Task({title, description, children, ...props}: { title: string, descrip
     )
 }
 
-function TaskLabel({value, show, task}: {value: string, show: boolean, task: string}) {
+function TaskLabel({value, show, task}: { value: string, show: boolean, task: string }) {
     if (!show) return null;
 
     return (
@@ -44,7 +45,7 @@ function Clicker() {
     return (
         <Task data-testid={"adventure-clicker"} title={"Click it!"} description={"Click the button to level up"}>
             <Button disabled={disabled} onClick={onClick}>Click me {maxClicks - clicks} times</Button>
-            <TaskLabel task={"clicker"} value={"Great job! You levelled up"} show={clicks === 5} />
+            <TaskLabel task={"clicker"} value={"Great job! You levelled up"} show={clicks === 5}/>
         </Task>
     )
 }
@@ -60,26 +61,34 @@ function Uploader() {
     return (
         <Task data-testid={"adventure-uploader"} title={"Upload it!"} description={"Upload any file to level up"}>
             <Input disabled={!!value} type={"file"} className={"w-1/2"} value={value} onChange={uploadHandler}/>
-            <TaskLabel task={"uploader"} value={"File selected, level up!"} show={!!value} />
+            <TaskLabel task={"uploader"} value={"File selected, level up!"} show={!!value}/>
         </Task>
     )
 }
 
 function Typer() {
+    const {setTheme} = useTheme();
     const [value, setValue] = useState<string>("");
     const increaseLevel = useStore(state => state.increaseLevel);
+    const activateBerserk = useStore(state => state.activateBerserk);
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
 
         if (event.target.value === "Lorem Ipsum") {
             increaseLevel();
+            return
+        }
+
+        if (event.target.value.toLowerCase() === "all your base are belong to us") {
+            setTheme("berserk");
+            activateBerserk();
         }
     }
 
     return (
         <Task data-testid={"adventure-typer"} title={"Type it!"} description={"Type Lorem Ipsum to level up"}>
             <Input disabled={value === "Lorem Ipsum"} className={"w-1/2"} value={value} onChange={changeHandler}/>
-            <TaskLabel task={"typer"} value={"Dolar sit amet!"} show={value === "Lorem Ipsum"} />
+            <TaskLabel task={"typer"} value={"Dolar sit amet!"} show={value === "Lorem Ipsum"}/>
         </Task>
     )
 }
@@ -98,15 +107,17 @@ function SliderTask() {
     }
 
     return (
-        <Task data-testid={"adventure-slider"} title={"Slide it!"} description={"Slide the slider all the way to the right"}>
-            <Slider className={"w-1/2"} disabled={disabled} onValueChange={onValueChange} defaultValue={[0]} max={100} step={1} />
-            <TaskLabel task={"slider"} value={"Slid to the next level!"} show={value[0] === 100} />
+        <Task data-testid={"adventure-slider"} title={"Slide it!"}
+              description={"Slide the slider all the way to the right"}>
+            <Slider className={"w-1/2"} disabled={disabled} onValueChange={onValueChange} defaultValue={[0]} max={100}
+                    step={1}/>
+            <TaskLabel task={"slider"} value={"Slid to the next level!"} show={value[0] === 100}/>
         </Task>
     )
 }
 
 
-export function AdventureContainer(props: {reset: () => void}) {
+export function AdventureContainer(props: { reset: () => void }) {
     const level = useStore(state => state.level);
 
     return (
@@ -119,10 +130,11 @@ export function AdventureContainer(props: {reset: () => void}) {
                 <Clicker/>
                 <Uploader/>
                 <Typer/>
-                <SliderTask />
+                <SliderTask/>
             </CardContent>
             {level === 5 && <CardFooter className={"flex flex-col space-y-2"}>
-              <span className={"text-lg text-amber-500 font-bold animate-pulse"}>You&apos;ve reached the highest level! </span>
+              <span
+                className={"text-lg text-amber-500 font-bold animate-pulse"}>You&apos;ve reached the highest level! </span>
               <Button data-play-again onClick={props.reset}>Play again</Button>
             </CardFooter>}
         </Card>
