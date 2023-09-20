@@ -23,7 +23,7 @@ function CharacterImage({src, alt}: {src: string, alt: string}) {
 
 function CharacterImageContainer({level, build}: CharacterImageContainerProps) {
     return (
-        <div className={"relative h-[180px] w-[240px]"}>
+        <div data-testid={"character-image"} className={"relative h-[180px] w-[240px]"}>
             <CharacterImage src={"/sprites/base_scaled_2x.png"} alt={"The base character image"} />
             {level > 1 && level <= 3 && <CharacterImage src={`/sprites/${build.weapon}_scaled_2x.png`} alt={"The characters' base weapon"} />}
             {level > 2 && level <= 4 && <CharacterImage src={`/sprites/${build.armor}_scaled_2x.png`} alt={"The characters' base armor"} />}
@@ -40,7 +40,7 @@ function CharacterStats() {
     const magic = useStore(state => state.magic);
 
     return (
-        <section className={"space-y-2 w-1/2"}>
+        <section data-testid={"character-stats"} className={"space-y-2 w-1/2"}>
             <h3 className={"font-semibold"}>Stats</h3>
             <ProgressBar
                 data-strength
@@ -74,10 +74,10 @@ export function CharacterCard(props: CharacterProps) {
     const maxLevel = 5;
 
     return (
-        <Card className={"w-full lg:w-1/2"}>
+        <Card data-testid={"character-card"} className={"w-full lg:w-1/2"}>
             <CardHeader>
-                <CardTitle>{props.name || "Your character"}</CardTitle>
-                    <CardDescription>
+                <CardTitle data-testid={"character-name"}>{props.name || "Your character"}</CardTitle>
+                    <CardDescription data-testid={"character-stats"}>
                         {!buildName && `Level ${props.level}`}
                         {!!buildName && `A level ${props.level} ${buildName}`}
                     </CardDescription>

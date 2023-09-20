@@ -6,7 +6,7 @@ import {CharacterCard} from "@/components/rpg/character";
 
 import {CharacterForm} from "@/components/rpg/forms/character-form";
 import {useStore} from "@/components/rpg/store";
-import {AdventureFormContainer} from "@/components/rpg/forms/adventure-form";
+import {AdventureContainer} from "@/components/rpg/forms/adventure-form";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -30,7 +30,7 @@ function Container({builds}: { builds: BuildMapping }) {
                 <CharacterCard name={name} level={level} build={!!build ? builds[build] : builds["thief"]}/>
                 {!show && <CharacterForm builds={builds} onSubmit={() => setShow(prevState => !prevState)}/>}
             </div>
-            {show && <AdventureFormContainer reset={() => {
+            {show && <AdventureContainer reset={() => {
                 reset();
                 setShow(false);
             }}/>}

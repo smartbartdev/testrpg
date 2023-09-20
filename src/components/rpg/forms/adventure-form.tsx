@@ -8,9 +8,9 @@ import {Input} from "@/components/ui/input";
 import {Slider} from "@/components/ui/slider";
 
 
-function Task({title, description, children}: { title: string, description: string, children: ReactNode }) {
+function Task({title, description, children, ...props}: { title: string, description: string, children: ReactNode }) {
     return (
-        <section className={"space-y-2 min-h-[100px]"}>
+        <section className={"space-y-2 min-h-[100px]"} {...props}>
             <div>
                 <h3 className={"text-lg font-semibold"}>{title}</h3>
                 <p className={"text-sm text-muted-foreground"}>{description}</p>
@@ -42,7 +42,7 @@ function Clicker() {
     }
 
     return (
-        <Task title={"Click it!"} description={"Click the button to level up"}>
+        <Task data-testid={"adventure-clicker"} title={"Click it!"} description={"Click the button to level up"}>
             <Button disabled={disabled} onClick={onClick}>Click me {maxClicks - clicks} times</Button>
             <TaskLabel task={"clicker"} value={"Great job! You levelled up"} show={clicks === 5} />
         </Task>
@@ -58,7 +58,7 @@ function Uploader() {
     }
 
     return (
-        <Task title={"Upload it!"} description={"Upload any file to level up"}>
+        <Task data-testid={"adventure-uploader"} title={"Upload it!"} description={"Upload any file to level up"}>
             <Input disabled={!!value} type={"file"} className={"w-1/2"} value={value} onChange={uploadHandler}/>
             <TaskLabel task={"uploader"} value={"File selected, level up!"} show={!!value} />
         </Task>
@@ -77,7 +77,7 @@ function Typer() {
     }
 
     return (
-        <Task title={"Type it!"} description={"Type Lorem Ipsum to level up"}>
+        <Task data-testid={"adventure-typer"} title={"Type it!"} description={"Type Lorem Ipsum to level up"}>
             <Input disabled={value === "Lorem Ipsum"} className={"w-1/2"} value={value} onChange={changeHandler}/>
             <TaskLabel task={"typer"} value={"Dolar sit amet!"} show={value === "Lorem Ipsum"} />
         </Task>
@@ -98,7 +98,7 @@ function SliderTask() {
     }
 
     return (
-        <Task title={"Slide it!"} description={"Slide the slider all the way to the right"}>
+        <Task data-testid={"adventure-slider"} title={"Slide it!"} description={"Slide the slider all the way to the right"}>
             <Slider className={"w-1/2"} disabled={disabled} onValueChange={onValueChange} defaultValue={[0]} max={100} step={1} />
             <TaskLabel task={"slider"} value={"Slid to the next level!"} show={value[0] === 100} />
         </Task>
@@ -106,11 +106,11 @@ function SliderTask() {
 }
 
 
-export function AdventureFormContainer(props: {reset: () => void}) {
+export function AdventureContainer(props: {reset: () => void}) {
     const level = useStore(state => state.level);
 
     return (
-        <Card>
+        <Card data-testid={"adventure-container"}>
             <CardHeader>
                 <CardTitle>Adventure time</CardTitle>
                 <CardDescription>Complete the tasks below and level up your character</CardDescription>
