@@ -9,6 +9,7 @@ const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'TestRPG',
+  metadataBase: new URL('https://test-rpg.vercel.app'),
   description: 'Create a character and level it up by controlling the ui',
   openGraph: {
     images: ['/testcoders.svg']
