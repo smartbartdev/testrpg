@@ -2,6 +2,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import Image from "next/image";
 import {useStore} from "@/components/rpg/store";
 import {ProgressBar} from "@/components/rpg/progress-bar";
+import Link from "next/link";
 
 export interface CharacterProps {
     name: string;
@@ -85,13 +86,14 @@ export function CharacterCard(props: CharacterProps) {
                 <CharacterImageContainer {...props} />
                 <CharacterStats />
             </CardContent>
-            <CardFooter className={"flex items-center justify-between"}>
+            <CardFooter className={"flex flex-col items-center space-y-2"}>
                 <ProgressBar
                     key={"progress-level"}
                     label={"Level"}
                     value={props.level}
                     total={maxLevel}
                 />
+                <Link className={"text-xs text-muted-foreground"} href={"https://opengameart.org/content/first-person-dungeon-crawl-protagonist"}>Images by Redshrike on opengameart.org</Link>
             </CardFooter>
         </Card>
     )
