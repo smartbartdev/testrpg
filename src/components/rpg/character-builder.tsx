@@ -17,6 +17,7 @@ function Container({builds}: { builds: BuildMapping }) {
     const level = useStore(state => state.level);
     const build = useStore(state => state.build);
     const setStats = useStore(state => state.setStats);
+    const reset = useStore(state => state.reset);
 
     useEffect(() => {
         const {strength, agility, wisdom, magic } = builds[build];
@@ -29,7 +30,10 @@ function Container({builds}: { builds: BuildMapping }) {
                 <CharacterCard name={name} level={level} build={!!build ? builds[build] : builds["thief"]}/>
                 {!show && <CharacterForm builds={builds} onSubmit={() => setShow(prevState => !prevState)}/>}
             </div>
-            {show && <AdventureFormContainer/>}
+            {show && <AdventureFormContainer reset={() => {
+                reset();
+                setShow(false);
+            }}/>}
         </div>
 
     )
