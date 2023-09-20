@@ -12,4 +12,5 @@ declare interface CharacterStore {
     setName: (name: string) => void;
     setLevel: (level: number) => void;
     setBuild: (build: string) => void;
+    increaseLevel: () => void;
 }
