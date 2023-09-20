@@ -10,6 +10,9 @@ const font = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'TestRPG',
   description: 'Create a character and level it up by controlling the ui',
+  openGraph: {
+    images: ['/testcoders.svg']
+  }
 }
 
 export default function RootLayout({
