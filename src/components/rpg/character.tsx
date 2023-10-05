@@ -15,20 +15,24 @@ interface CharacterImageContainerProps {
     build: Build;
 }
 
-function CharacterImage({src, alt}: {src: string, alt: string}) {
+function CharacterImage({src, alt}: { src: string, alt: string }) {
     return (
-        <Image src={src} alt={alt} width={240} height={320} className={"absolute"} />
+        <Image src={src} alt={alt} width={240} height={320} className={"absolute"}/>
     )
 }
 
 function CharacterImageContainer({level, build}: CharacterImageContainerProps) {
     return (
-        <div data-testid={"character-image"} className={"relative h-[180px] w-[240px]"}>
-            <CharacterImage src={"/sprites/base_scaled_2x.png"} alt={"The base character image"} />
-            {level > 1 && level <= 3 && <CharacterImage src={`/sprites/${build.weapon}_scaled_2x.png`} alt={"The characters' base weapon"} />}
-            {level > 2 && level <= 4 && <CharacterImage src={`/sprites/${build.armor}_scaled_2x.png`} alt={"The characters' base armor"} />}
-            {level > 3 && <CharacterImage src={`/sprites/${build.upgradedWeapon}_scaled_2x.png`} alt={"The characters' upgraded weapon"} />}
-            {level > 4 && <CharacterImage src={`/sprites/${build.upgradedArmor}_scaled_2x.png`} alt={"The characters' upgraded armor"} />}
+        <div data-testid={"character-image"} className={"relative h-[180px] w-[240px] mx-auto my-auto"}>
+            <CharacterImage src={"/sprites/base_scaled_2x.png"} alt={"The base character image"}/>
+            {level > 1 && level <= 3 &&
+              <CharacterImage src={`/sprites/${build.weapon}_scaled_2x.png`} alt={"The characters' base weapon"}/>}
+            {level > 2 && level <= 4 &&
+              <CharacterImage src={`/sprites/${build.armor}_scaled_2x.png`} alt={"The characters' base armor"}/>}
+            {level > 3 && <CharacterImage src={`/sprites/${build.upgradedWeapon}_scaled_2x.png`}
+                                          alt={"The characters' upgraded weapon"}/>}
+            {level > 4 && <CharacterImage src={`/sprites/${build.upgradedArmor}_scaled_2x.png`}
+                                          alt={"The characters' upgraded armor"}/>}
         </div>
     )
 }
@@ -74,17 +78,17 @@ export function CharacterCard(props: CharacterProps) {
     const maxLevel = 5;
 
     return (
-        <Card data-testid={"character-card"} className={"w-full lg:w-1/2"}>
+        <Card data-testid={"character-card"} className={"w-full"}>
             <CardHeader>
                 <CardTitle data-testid={"character-name"}>{props.name || "Your character"}</CardTitle>
-                    <CardDescription data-testid={"character-stats"}>
-                        {!buildName && `Level ${props.level}`}
-                        {!!buildName && `A level ${props.level} ${buildName}`}
-                    </CardDescription>
+                <CardDescription data-testid={"character-stats"}>
+                    {!buildName && `Level ${props.level}`}
+                    {!!buildName && `A level ${props.level} ${buildName}`}
+                </CardDescription>
             </CardHeader>
-            <CardContent className={"flex"}>
+            <CardContent className={"flex justify-between"}>
                 <CharacterImageContainer {...props} />
-                <CharacterStats />
+                <CharacterStats/>
             </CardContent>
             <CardFooter className={"flex flex-col items-center space-y-2"}>
                 <ProgressBar
@@ -93,7 +97,9 @@ export function CharacterCard(props: CharacterProps) {
                     value={props.level}
                     total={maxLevel}
                 />
-                <Link className={"text-xs text-muted-foreground"} href={"https://opengameart.org/content/first-person-dungeon-crawl-protagonist"}>Images by Redshrike on opengameart.org</Link>
+                <Link className={"text-xs text-muted-foreground"}
+                      href={"https://opengameart.org/content/first-person-dungeon-crawl-protagonist"}>Images by
+                    Redshrike on opengameart.org</Link>
             </CardFooter>
         </Card>
     )
