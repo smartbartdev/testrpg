@@ -1,6 +1,6 @@
 import {buttonVariants} from "@/components/ui/button";
 import Link from "next/link";
-import {ApiExplainer} from "@/components/api-explainer";
+import {Introduction as ApiIntroduction} from "@/components/api-explainer";
 import {cn} from "@/lib/utils";
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
                         <p>View on Github</p>
                     </a>
                 </section>
-                <ApiExplainer/>
+                <ApiIntroduction />
        </div>
     )
 }
