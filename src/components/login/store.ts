@@ -8,7 +8,7 @@ interface LoginStore {
 }
 
 export const useLoginStore = create<LoginStore>()(persist((set) => ({
-  isLoggedIn: true,
+  isLoggedIn: false,
   login: () => set(() => ({isLoggedIn: true})),
   logout: () => set(() => ({isLoggedIn: false})),
 }), {
