@@ -71,13 +71,13 @@ export function ApiEndpoints() {
         </p>
         <pre className={"whitespace-pre-wrap"}>{JSON.stringify({
           "build": {
-            "name": "mage",
-            "strength": 1,
-            "agility": 1,
-            "wisdom": 1,
-            "magic": 1
+            "name": "string",
+            "strength": "number",
+            "agility": "number",
+            "wisdom": "number",
+            "magic": "number"
           }
-        })}</pre>
+        }, undefined, 2)}</pre>
         <p>
           Name cannot be an existing name and no skill can have a level higher than 10. 10 is also the maximum
           for the sum of all skills combined.
