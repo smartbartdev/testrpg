@@ -27,8 +27,10 @@ Bonus:
 
 ### Getting Started
 
-First, install the project using `pnpm install`:
+Make sure you have node installed, then run `corepack enable pnpm` to install `pnpm` if you're running node >= v16.13. For lower versions visit the `pnpm` docs.
+Now you can install the project dependencies using `pnpm install`.
 
+Finally, run the dev server:
 ```bash
 pnpm dev
 ```
