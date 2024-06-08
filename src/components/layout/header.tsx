@@ -9,7 +9,6 @@ export default function Header() {
                 <Link href={"/"}><span className={"text-white font-extrabold"}>TestRPG</span></Link>
                 <div className={"flex items-center space-x-4"}>
                   <LoginButton />
-                  <Link href={"https://www.testcoders.nl/"} target={"_blank"}><Image src={"/testcoders.svg"} width={80} height={80} alt={"TestCoders logo"}/></Link>
                 </div>
             </div>
         </header>
